@@ -1,6 +1,7 @@
 from abc import ABC, abstractclassmethod
-from src.Project import Project
-from src.Accounting import Accounting
+import src.Project as pr
+import src.Accounting as ac
+
 class Employee(ABC):
 
     def __init__(self, salary: float,
@@ -59,7 +60,7 @@ class Employee(ABC):
         return self.__project
 
     @project.setter
-    def project(self, new_project: Project):
+    def project(self, new_project: pr.Project):
         self.__project = new_project
 
     @property
@@ -67,7 +68,7 @@ class Employee(ABC):
         return self.__accounting
 
     @accounting.setter
-    def accounting(self, accounting: Accounting):
+    def accounting(self, accounting: ac.Accounting):
         self.__accounting = accounting
 
     def print_info(self):

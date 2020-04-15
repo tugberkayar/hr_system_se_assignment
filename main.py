@@ -1,20 +1,22 @@
-from src.Analyst import Analyst
-from src.Designer import Designer
-from src.Manager import Manager
-from src.Programmer import Programmer
-from src.Tester import Tester
-from src.Maintainer import Maintainer
+import src.Analyst as an
+import src.Designer as ds
+import src.Manager as mng
+import src.Programmer as prgr
+import src.Tester as tester
+import src.Project as prj
 
-a = Analyst(1000, 'tugberk', 1)
-d = Designer(400, 'ipek', 2)
-m = Manager(20000, 'dogan', 3)
-p = Programmer(2000, 'etkin', 4)
-t = Tester(3, 'deniz', 5)
-ma = Maintainer(5, 'fatma', 7)
 
-a.print_info()
-d.print_info()
-m.print_info()
-p.print_info()
-t.print_info()
-ma.print_info()
+
+a = an.Analyst(1000, 'tugberk', 1)
+d = ds.Designer(400, 'ipek', 2)
+m = mng.Manager(20000, 'dogan', 3)
+p = prgr.Programmer(2000, 'etkin', 4)
+t = tester.Tester(3, 'deniz', 5)
+
+project = prj.Project(2, 4)
+project.add_new_employee(a)
+project.add_new_employee(d)
+project.add_new_employee(m)
+project.add_new_employee(p)
+project.add_new_employee(t)
+print('asdf')

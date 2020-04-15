@@ -1,6 +1,6 @@
-from src.Employee import Employee
+import src.Employee as em
 
-class Programmer(Employee):
+class Programmer(em.Employee):
 
     def __init__(self, salary: float,
                  name: str,
@@ -8,7 +8,7 @@ class Programmer(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Programmer', project, accounting)
+        em.Employee.__init__(self, salary, name, id, 'Programmer', project, accounting)
 
     def print_info(self):
         print(self.domain)
