@@ -1,4 +1,4 @@
-from abc import ABC, abstractclassmethod
+from abc import ABC
 import src.Project as pr
 import src.Accounting as ac
 
@@ -73,6 +73,95 @@ class Employee(ABC):
 
     def print_info(self):
         print('employee')
+
+
+class Analyst(Employee):
+
+    def __init__(self, salary: float,
+                 name: str,
+                 id: int,
+                 project=None,
+                 accounting=None):
+
+        Employee.__init__(self, salary, name, id, 'Analyst', project, accounting)
+
+    def print_info(self):
+        print(self.domain)
+
+
+class Designer(Employee):
+
+    def __init__(self, salary: float,
+                 name: str,
+                 id: int,
+                 project=None,
+                 accounting=None):
+
+        Employee.__init__(self, salary, name, id, 'Designer', project, accounting)
+
+    def print_info(self):
+        print(self.domain)
+
+
+class Maintainer(Employee):
+
+    def __init__(self, salary: float,
+                 name: str,
+                 id: int,
+                 project=None,
+                 accounting=None):
+
+        Employee.__init__(self, salary, name, id, 'Maintainer', project, accounting)
+
+    def print_info(self):
+        print(self.domain)
+
+
+class Manager(Employee):
+
+    def __init__(self, salary: float,
+                 name: str,
+                 id: int,
+                 project=None,
+                 accounting=None):
+
+        Employee.__init__(self, salary, name, id, 'Manager', project, accounting)
+
+    def print_info(self):
+        print(self.domain)
+
+
+class Programmer(Employee):
+
+    def __init__(self, salary: float,
+                 name: str,
+                 id: int,
+                 project=None,
+                 accounting=None):
+
+        Employee.__init__(self, salary, name, id, 'Programmer', project, accounting)
+
+    def print_info(self):
+        print(self.domain)
+
+
+class Tester(Employee):
+
+    def __init__(self, salary: float,
+                 name: str,
+                 id: int,
+                 project=None,
+                 accounting=None):
+
+        Employee.__init__(self, salary, name, id, 'Tester', project, accounting)
+
+    def print_info(self):
+        print(self.domain)
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import src.Employee as em
+
 
 
 class Project:
@@ -33,7 +33,7 @@ class Project:
 
     @employee_counter.setter
     def employee_counter(self, value: int):
-        self.employee_counter = value
+        self.__employee_counter = value
 
 
     @property
