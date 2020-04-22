@@ -1,7 +1,6 @@
 import src.Employee as em
 import src.Project as prj
 
-
 a = em.Analyst(1000, 'tugberk', 1)
 d = em.Designer(400, 'ipek', 2)
 m = em.Manager(20000, 'dogan', 3)

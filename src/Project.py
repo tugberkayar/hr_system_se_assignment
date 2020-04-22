@@ -1,6 +1,3 @@
-
-
-
 class Project:
 
     def __init__(self, min_employee: int,
