@@ -56,6 +56,10 @@ class Project:
             self.employees.pop(employee_id)
             self.employee_counter -= 1
 
+    def print_all_employees(self):
+        for e in self.employees:
+            print(self.employees[e])
+
 
 
 
