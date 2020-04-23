@@ -1,19 +1,26 @@
-from src.API import API
+from src.WebService import WebService
+import numpy as np
+
+
 class Accounting:
 
     def __init__(self):
-        self.service = API()
+        self.service = None
+        self.percentage = np.random.rand(1)[0]
 
     @property
     def service(self):
         return self.__service
 
     @service.setter
-    def service(self, api: API):
-        self.__service = api
+    def service(self, service: WebService):
+        self.__service = service
 
-    def calculate_salary(self, salary):
-        return self.base_salary + 1000 * self.service.percentage
+    def calc_salary(self, salary):
+        return 5000 + self.service.percentage * 1000
 
-    def calculate_compensation(self, salary):
-        return self.service.percentage * salary
+    def calc_compensation(self, salary: float):
+        if self.service is not None:
+            return self.service.percentage * salary
+        else:
+            return self.percentage * salary

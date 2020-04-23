@@ -4,24 +4,13 @@ import src.Accounting as ac
 
 class Employee(ABC):
 
-    def __init__(self, salary: float,
-                 name: str,
-                 id: int,
-                 domain: str,
-                 project = None,
-                 accounting = None):
-
+    def __init__(self, salary: float, name: str, emp_id: int, domain: str, accounting = None):
         self.salary = salary
         self.name = name
-        self.id = id
+        self.id = emp_id
         self.domain = domain
-
-        if project is not None:
-            self.project = project
-
-
-        if accounting is not None:
-            self.accounting = accounting
+        self.project_id = None
+        self.accounting = accounting
 
     @property
     def salary(self):
@@ -96,7 +85,7 @@ class Analyst(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Analyst', project, accounting)
+        Employee.__init__(self, salary, name, id, 'Analyst', accounting)
 
     def print_info(self):
         print(self.domain)
@@ -110,7 +99,7 @@ class Designer(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Designer', project, accounting)
+        Employee.__init__(self, salary, name, id, 'Designer', accounting)
 
     def print_info(self):
         print(self.domain)
@@ -124,7 +113,7 @@ class Maintainer(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Maintainer', project, accounting)
+        Employee.__init__(self, salary, name, id, 'Maintainer', accounting)
 
     def print_info(self):
         print(self.domain)
@@ -138,7 +127,7 @@ class Manager(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Manager', project, accounting)
+        Employee.__init__(self, salary, name, id, 'Manager', accounting)
 
     def print_info(self):
         print(self.domain)
@@ -152,7 +141,7 @@ class Programmer(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Programmer', project, accounting)
+        Employee.__init__(self, salary, name, id, 'Programmer', accounting)
 
     def print_info(self):
         print(self.domain)
@@ -166,7 +155,7 @@ class Tester(Employee):
                  project=None,
                  accounting=None):
 
-        Employee.__init__(self, salary, name, id, 'Tester', project, accounting)
+        Employee.__init__(self, salary, name, id, 'Tester', accounting)
 
     def print_info(self):
         print(self.domain)
