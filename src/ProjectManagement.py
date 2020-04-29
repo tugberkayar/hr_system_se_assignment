@@ -1,6 +1,5 @@
-from Project import Project
-from Employee import Employee
-
+from src.Project import Project
+from src.Employee import Employee
 
 class ProjectManagement:
     def __init__(self):
@@ -33,6 +32,8 @@ class ProjectManagement:
         else:
             # if boundaries are plausible create and return a "project" object
             temp = Project(pr_id, min_emp_num, max_emp_num)
+            # append newly created project to projects list
+            self.projects[temp.id] = temp
             return temp
 
     def get_emps_ids(self):
@@ -111,4 +112,3 @@ class ProjectManagement:
         if not prj.running:
             raise Exception("Project is not running")
         prj.running = False
-
