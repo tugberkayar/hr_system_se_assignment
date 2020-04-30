@@ -63,18 +63,17 @@ class Employee(ABC):
     def print_info(self):
         print('employee')
     def __str__(self):
-        return r"""ID   : {id},
+        return r"""---------------------
+ID   : {id},
 Isim : {name},
 Maas : {salary},
 Alan : {domain},
-Acco : {acc}
 ---------------------
             
         """.format(id=self.id,
                    name=self.name,
                    salary=self.salary,
-                   domain=self.domain,
-                   acc=self.accounting.service.percentage)
+                   domain=self.domain)
 
 
 class Analyst(Employee):
