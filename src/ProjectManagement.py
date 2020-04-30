@@ -1,11 +1,14 @@
 from src.Project import Project
 from src.Employee import Employee
+from src.DataHandler import DataHandler
+import numpy as np
 
 class ProjectManagement:
     def __init__(self):
         # This class has to know about everything so it holds all projects and employees
         self.projects = dict()
         self.employees = dict()
+        self.data_handler = DataHandler()
 
     def get_projects_ids(self):
         return list(self.projects)
@@ -45,7 +48,13 @@ class ProjectManagement:
         # if given id in current ids return True else False
         return emp_id in ids
 
-    def hire_employee(self):
+    def hire_employee(self,name:str,domain:str):
+        #generate id
+        #generate salary
+        #decide if using webservice of deafult accounting
+        #create employee
+        #add employee to list
+        #override for reading from file ???
         pass
 
     # this is for firing employees that not working in a project
@@ -112,3 +121,11 @@ class ProjectManagement:
         if not prj.running:
             raise Exception("Project is not running")
         prj.running = False
+
+    def print_all_projects(self):
+        for p in self.projects:
+            print(self.projects[p])
+
+    def print_all_employees(self):
+        for e in self.employees:
+            print(self.employees[e])
