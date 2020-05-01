@@ -1,0 +1,86 @@
+<HomeScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Employees'
+                    size_hint_y: 0.1
+                RecycleView:
+                    viewclass: "Button"
+                    data:root.data
+                    RecycleBoxLayout:
+                        orientation:'vertical'
+                        height: self.minimum_height
+                        default_size_hint: 1, None
+                        size_hint_y: None
+            BoxLayout:
+                orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Project'
+                    size_hint_y: 0.1
+                RecycleView:
+                    viewclass: "Button"
+                    data:root.data
+                    RecycleBoxLayout:
+                        orientation:'vertical'
+                        height: self.minimum_height
+                        default_size_hint: 1, None
+                        size_hint_y: None
+            BoxLayout:
+                orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Project edit'
+                    size_hint_y: 0.1
+                RecycleView:
+                    viewclass: "Label"
+                    GridLayout:
+                        cols:2
+                        Label: 
+                            text: 'Project ID'
+                        TextInput:
+                        Label: 
+                            text: 'Minimum Employee'
+                        TextInput:
+                        Label: 
+                            text: 'Maksimum Employee'
+                        TextInput:
+            BoxLayout:
+                orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Aplicants'
+                    size_hint_y: 0.1
+                RecycleView:
+                    viewclass: "Button"
+                    data:root.data
+                    RecycleBoxLayout:
+                        orientation:'vertical'
+                        height: self.minimum_height
+                        default_size_hint: 1, None
+                        size_hint_y: None
+        BoxLayout:
+            size_hint_y: 0.3
+            Label:
+                text: "Dummy Text"
+            GridLayout:
+                cols:3
+                Button:
+                    text: "New project"
+                Button:
+                    text: "Start project"
+                Button:
+                    text: "End project"
+                Button:
+                    text: "Hire employee"
+                Button:
+                    text: "Fire employee"
+                Button:
+                    text: "Info"
