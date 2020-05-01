@@ -35,3 +35,6 @@ class DataHandler:
 
     def save_current_projects(self, projects):
         pass
+
+    def generate_random_employee_data(self, size: int):
+        pass
