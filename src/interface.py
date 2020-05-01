@@ -13,11 +13,11 @@ from kivy.properties import ListProperty
 from kivy.uix.textinput import TextInput
 
 class HomeScreen(Screen):
-    data = ListProperty([])
-
+    current_emps = ListProperty([])
+    current_projects = ListProperty([])
     def __init__(self, *args, **kwargs):
         super(HomeScreen, self).__init__(*args, **kwargs)
-        self.data = [{'text': 'etkin_'},
+        self.current_emps = [{'text': 'etkin_'},
                      {'text': 'etkin0'},
                      {'text': 'etkin1'},
                      {'text': 'etkin2'},
@@ -31,8 +31,22 @@ class HomeScreen(Screen):
                      {'text': 'etkin8'},
                      {'text': 'etkin8'},
                      {'text': 'etkin8'},
-                     {'text': 'etkin8'},]
-
+                     {'text': 'etkin8'}]
+        self.current_projects = [{'text': 'ipek_'},
+                     {'text': 'ipek0'},
+                     {'text': 'ipek1'},
+                     {'text': 'ipek2'},
+                     {'text': 'ipek3'},
+                     {'text': 'ipek4'},
+                     {'text': 'ipek5'},
+                     {'text': 'ipek6'},
+                     {'text': 'ipek7'},
+                     {'text': 'ipek8'},
+                     {'text': 'ipek8'},
+                     {'text': 'ipek8'},
+                     {'text': 'ipek8'},
+                     {'text': 'ipek8'},
+                     {'text': 'ipek8'}]
 
 class HrSystem(App):
     def build(self):

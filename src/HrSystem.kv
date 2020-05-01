@@ -10,14 +10,14 @@
                     size_hint_y: 0.1
                 RecycleView:
                     viewclass: "Button"
-                    data:root.data
+                    data:root.current_emps
                     RecycleBoxLayout:
                         orientation:'vertical'
                         height: self.minimum_height
                         default_size_hint: 1, None
                         size_hint_y: None
-            BoxLayout:
-                orientation: 'horizontal'
+                Label:
+                    size_hint_y: 0.1
             BoxLayout:
                 orientation: 'vertical'
                 Label:
@@ -25,34 +25,14 @@
                     size_hint_y: 0.1
                 RecycleView:
                     viewclass: "Button"
-                    data:root.data
+                    data:root.current_projects
                     RecycleBoxLayout:
                         orientation:'vertical'
                         height: self.minimum_height
                         default_size_hint: 1, None
                         size_hint_y: None
-            BoxLayout:
-                orientation: 'horizontal'
-            BoxLayout:
-                orientation: 'vertical'
                 Label:
-                    text: 'Project edit'
                     size_hint_y: 0.1
-                RecycleView:
-                    viewclass: "Label"
-                    GridLayout:
-                        cols:2
-                        Label: 
-                            text: 'Project ID'
-                        TextInput:
-                        Label: 
-                            text: 'Minimum Employee'
-                        TextInput:
-                        Label: 
-                            text: 'Maksimum Employee'
-                        TextInput:
-            BoxLayout:
-                orientation: 'horizontal'
             BoxLayout:
                 orientation: 'vertical'
                 Label:
@@ -60,16 +40,38 @@
                     size_hint_y: 0.1
                 RecycleView:
                     viewclass: "Button"
-                    data:root.data
+                    data:root.current_emps
                     RecycleBoxLayout:
                         orientation:'vertical'
                         height: self.minimum_height
                         default_size_hint: 1, None
                         size_hint_y: None
+                Label:
+                    size_hint_y: 0.1
         BoxLayout:
             size_hint_y: 0.3
+            BoxLayout:
+                orientation: 'vertical'
             Label:
-                text: "Dummy Text"
+                text: 'Project edit'
+                
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text: 'ID'
+                TextInput:
+           
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text: 'Minimum Employee Number'
+                TextInput:
+            
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text: 'Maximum Employee Number'
+                TextInput:
             GridLayout:
                 cols:3
                 Button:
