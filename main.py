@@ -9,8 +9,7 @@ def main():
     ProjectManager = ProjectManagement()
     emp_dict = ProjectManager.data_handler.load_current_employees(EMP_FILE_CSV)
     pro_dict = ProjectManager.data_handler.load_current_projects(PRO_FILE_CSV)
-    temp_emp = None
-    temp_pro = None
+    print(emp_dict)
 
 
 if __name__ == "__main__":
