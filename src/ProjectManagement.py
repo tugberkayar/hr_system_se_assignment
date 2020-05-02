@@ -1,9 +1,11 @@
 from src.Project import Project
 from src.Employee import Employee
+from src.Accounting import Accounting
 import numpy as np
 
+
 class ProjectManagement:
-    def __init__(self, projects:dict, employees:dict):
+    def __init__(self, projects: dict, employees: dict):
         # This class has to know about everything so it holds all projects and employees
         self.projects = projects
         self.employees = employees
@@ -13,7 +15,7 @@ class ProjectManagement:
         return self.__projects
 
     @projects.setter
-    def projects(self, projects:dict):
+    def projects(self, projects: dict):
         self.__projects = projects
 
     @property
@@ -21,9 +23,8 @@ class ProjectManagement:
         return self.__employees
 
     @employees.setter
-    def employees(self, employees:dict):
+    def employees(self, employees: dict):
         self.__employees = employees
-
 
 
     def get_projects_ids(self):
@@ -64,14 +65,31 @@ class ProjectManagement:
         # if given id in current ids return True else False
         return emp_id in ids
 
-    def hire_employee(self,name:str,domain:str):
-        #generate id
-        #generate salary
-        #decide if using webservice of deafult accounting
-        #create employee
-        #add employee to list
-        #override for reading from file ???
-        pass
+    def hire_employee(self, name: str, domain: str, default_accounting=None):
+        # generate id
+        ids = self.get_emps_ids()
+        if len(ids) == 0:
+            generated_id = 1000
+        else:
+            generated_id = np.array(ids).max() + 1
+        # generate salary
+        random_salary = 4000 + np.random.rand(1)[0] * 1000
+        # decide if using webservice of default accounting
+        if default_accounting is None:
+            accounting = None
+        else:
+            accounting = Accounting()
+        # create employee
+        emp = Employee(salary=random_salary,
+                        name= name,
+                        emp_id= generated_id,
+                        domain=domain,
+                        accounting=accounting
+                        )
+        # add employee to list
+        self.employees[emp.id] = emp
+        # override for reading from file ???
+        return emp
 
     # this is for firing employees that not working in a project
     # to use this function remove employee from the project that s/he works on

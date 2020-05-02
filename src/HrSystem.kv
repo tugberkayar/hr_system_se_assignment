@@ -13,6 +13,11 @@
                     id: applicants
                     text: "Choose an applicant"
                     on_text:root.applicant_spinner_select()
+                Spinner:
+                    text : "Choose an accounting type"
+                    values : ["Default", "Webservice"]
+                    id : accounting_type_spinner
+                    size_hint_y : 0.1
                 Label:
                     id:applicant_info
                     size_hint_y: 0.8
@@ -62,7 +67,6 @@
                         Label:
                             text: 'Minimum Employee Number'
                         TextInput:
-
                     BoxLayout:
                         orientation:'vertical'
                         Label:
@@ -90,3 +94,15 @@
                 Button:
                     text: "Assign to Project"
                     on_press:root.assign_to_project_on_click()
+##<AccountingPopup>:
+##    BoxLayout:
+##        orientation: 'vertical'
+##        Label :
+##            text : "Choose an accounting type"
+##        Spinner:
+##            text : "Default"
+##            values : ["Default", "Webservice"]
+##            id : accounting_type_spinner
+##        Button:
+##            text: "Hire"
+##            on_press : root.dismiss()
