@@ -148,13 +148,12 @@ class ProjectManagement:
         
 
     def end_project(self, pr_id: int):
-        prj_exists = self.project_exists(pr_id)
-        if not prj_exists:
-            raise Exception("Project does not exist")
         prj = self.projects.get(pr_id)
-        if not prj.running:
-            raise Exception("Project is not running")
-        prj.running = False
+        if prj.running:
+            prj.running = False
+            return True
+        else:
+            return False
 
     def print_all_projects(self):
         for p in self.projects:

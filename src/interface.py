@@ -70,11 +70,18 @@ class HomeScreen(Screen):
             self.ids.project_info.text = ""
             self.ids.projects.text = "Choose a project"
 
-        
-
     def end_project_on_click(self):
-        pass
-
+        if not self.ids.projects.text == "Choose a project":
+            selected_id = int(self.ids.projects.text)
+            status = self.__project_manager.end_project(selected_id)
+            if status:
+                #biten projec silinecek mi?
+                #işçiler neye göre dağıtılacak
+                pass
+            else:
+                showerror("ERROR","Project is not running")
+            self.ids.project_info.text = ""
+            self.ids.projects.text = "Choose a project"
     def fire_employee_on_click(self):
         if not self.ids.employees.text == "Choose an employee":
             print(self.ids.employees.text.split(":")[-1])
