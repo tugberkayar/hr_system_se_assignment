@@ -1,3 +1,3 @@
-id,salary,name,domain
-0,4000,tugberk,Analyst
-1,5000,ipek,Designer
+id,name,domain
+0,tugberk,Analyst
+1,ipek,Designer

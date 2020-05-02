@@ -9,34 +9,39 @@
                     text: 'Aplicants'
                     size_hint_y: 0.1
                 Spinner:
+                    size_hint_y: 0.1
                     id: applicants
                     text: "Choose an applicant"
-                    values: ['etkin', 'tugberk']
+                    on_text:root.applicant_spinner_select()
                 Label:
-                    size_hint_y: 0.1
+                    id:applicant_info
+                    size_hint_y: 0.8
             BoxLayout:
                 orientation : 'vertical'
                 Label:
                     text: 'Projects'
                     size_hint_y: 0.1
                 Spinner:
+                    size_hint_y: 0.1
                     id: projects
                     text: "Choose an project"
-                    values: ['beyza', 'beyza2']
+                    on_text:root.project_spinner_select()
                 Label:
-                    size_hint_y: 0.1
+                    id:project_info
+                    size_hint_y: 0.8
             BoxLayout:
                 orientation : 'vertical'
                 Label:
                     text: 'Employees'
                     size_hint_y: 0.1
                 Spinner:
+                    size_hint_y: 0.1
                     id: employees
                     text: "Choose an employee"
-                    values: ['ipek', 'betul']
                     on_text:root.employee_spinner_select()
                 Label:
-                    size_hint_y: 0.1
+                    id:employee_info
+                    size_hint_y: 0.8
         BoxLayout:
             size_hint_y: 0.3
             rientation: 'horizontal'

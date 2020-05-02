@@ -26,7 +26,7 @@ class HomeScreen(Screen):
         self.__projects_dict = self.__data_handler.load_current_projects()
         self.__retrieve_project_employees()
         self.ids.employees.values = ["Name:{name}, ID:{id}".format(name=e.name, id=e.id) for e in self.__employees_dict.values()]
-        self.ids.applicants.values = [a['name'] for a in self.__applicant_list]
+        self.ids.applicants.values = ["Name:{name}, ID:{id}".format(name =a['name'], id=a['id'] ) for a in self.__applicant_list]
         self.ids.projects.values = [str(p.id) for p in self.__projects_dict.values()]
 
     def hire_button_on_click(self):
@@ -43,8 +43,17 @@ class HomeScreen(Screen):
     def employee_spinner_select(self):
         selected_id = int(self.ids.employees.text.split(":")[-1])
         employee = self.__employees_dict[selected_id]
-        print(employee.name)
+        self.ids.employee_info.text = str(employee)
+    
+    def project_spinner_select(self):
+        selected_id = int(self.ids.projects.text)
+        project = self.__projects_dict[selected_id]
+        self.ids.project_info.text = str(project)
 
+    def applicant_spinner_select(self):
+        selected_id = int(self.ids.applicants.text.split(":")[-1])
+        applicant = self.__applicant_list[selected_id]
+        self.ids.applicant_info.text = "Name:{name}\ndomain:{domain}".format(name =applicant['name'], domain=applicant['domain'])
 
 
 class HrSystem(App):
