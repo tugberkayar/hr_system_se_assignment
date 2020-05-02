@@ -106,17 +106,9 @@ class ProjectManagement:
 
         #check if project is running
 
-    def add_emp_to_project(self, employee_id: int, project_id: int):
-        emp_exists = self.employee_exists(employee_id)
-        prj_exists = self.project_exists(project_id)
-        if not emp_exists:
-            print("employee does not exist")
-            return False
-        if not prj_exists:
-            print("project does not exist")
-            return False
-        emp = self.employees.get(employee_id)
-        prj = self.projects.get(project_id)
+    def assign_to_project(self, employee_id: int, project_id: int):
+        emp = self.employees.[employee_id]
+        prj = self.projects.[project_id]
         return prj.add_emp(emp)
 
     def remove_emp_from_project(self, employee_id: int, project_id: int):
