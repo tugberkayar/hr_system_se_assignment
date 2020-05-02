@@ -1,3 +1,3 @@
 id,min_emp_num,max_emp_num,emp_counter,employees,running
-1000,2,4,1,[],False
+1000,0,4,1,[],False
 2000,3,5,1,[],False

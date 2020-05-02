@@ -10,9 +10,6 @@ import tkinter as tk
 from tkinter.messagebox import showerror
 tk.Tk().withdraw()
 
-#class AccountingPopup(Popup):
-#    pass
-
 class HomeScreen(Screen):
 
     def __init__(self, *args, **kwargs):
@@ -25,15 +22,19 @@ class HomeScreen(Screen):
         )
         self.__applicant_list = self.__data_handler.load_applicants()
         self.__retrieve_project_employees()
+        self.reset_applicant_spinner_values()
+        self.reset_employee_spinner_values()
+        self.reset_project_spinner_values()
+
+    def reset_employee_spinner_values(self):
         self.ids.employees.values = ["Name:{name}, ID:{id}".format(name=e.name, id=e.id) for e in self.__project_manager.employees.values()]
-        self.ids.applicants.values = ["Name:{name}, ID:{id}".format(name =a['name'], id=a['id'] ) for a in self.__applicant_list]
+
+    def reset_project_spinner_values(self):
         self.ids.projects.values = [str(p.id) for p in self.__project_manager.projects.values()]
-        #self.accounting_popup = AccountingPopup()
 
-
-#    def default_accounting_on_click(self):
-#        self.accounting_popup.close()
-
+    def reset_applicant_spinner_values(self):
+        self.ids.applicants.values = ["Name:{name}, ID:{id}".format(name =a['name'], id=a['id'] ) for a in self.__applicant_list]
+    
     def hire_button_on_click(self):
         if (not self.ids.applicants.text == "Choose an applicant" and
             not self.ids.accounting_type_spinner.text == "Choose an accounting type") :
@@ -48,7 +49,7 @@ class HomeScreen(Screen):
                                                         default_accounting=accounting)
             
             self.ids.applicants.values.remove(self.ids.applicants.text)
-            self.ids.employees.values = ["Name:{name}, ID:{id}".format(name=e.name, id=e.id) for e in self.__project_manager.employees.values()]
+            self.reset_employee_spinner_values()
             self.ids.accounting_type_spinner.text = "Choose an accounting type"
             self.ids.applicants.text = "Choose an applicant"
             #self.accounting_popup.open()
@@ -57,7 +58,19 @@ class HomeScreen(Screen):
         pass
 
     def start_project_on_click(self):
-        pass
+        if not self.ids.projects.text == "Choose a project":
+            selected_id = int(self.ids.projects.text)
+            status = self.__project_manager.start_project(selected_id)
+            if status == 0:
+                self.reset_project_spinner_values()
+            elif status == 1:
+                showerror("ERROR", "Minimum employee requirement has not been satisfied.")
+            elif status == 2:
+                showerror("ERROR", "Project is already running.")
+            self.ids.project_info.text = ""
+            self.ids.projects.text = "Choose a project"
+
+        
 
     def end_project_on_click(self):
         pass
@@ -67,7 +80,7 @@ class HomeScreen(Screen):
             print(self.ids.employees.text.split(":")[-1])
             selected_id = int(self.ids.employees.text.split(":")[-1])
             if self.__project_manager.fire_employee(employee_id=selected_id):
-                self.ids.employees.values = ["Name:{name}, ID:{id}".format(name=e.name, id=e.id) for e in self.__project_manager.employees.values()]
+                self.reset_employee_spinner_values()
             else:
                 showerror("ERROR", "This employee currently working on a project")
             self.ids.employees.text = "Choose an employee"
@@ -90,9 +103,12 @@ class HomeScreen(Screen):
             self.ids.employee_info.text = ""
 
     def project_spinner_select(self):
-        selected_id = int(self.ids.projects.text)
-        project = self.__project_manager.projects[selected_id]
-        self.ids.project_info.text = str(project)
+        if not self.ids.projects.text == "Choose a project":
+            selected_id = int(self.ids.projects.text)
+            project = self.__project_manager.projects[selected_id]
+            self.ids.project_info.text = str(project)
+        else:
+            self.ids.project_info.text = ""
 
     def applicant_spinner_select(self):
         if not self.ids.applicants.text == "Choose an applicant":

@@ -133,25 +133,19 @@ class ProjectManagement:
         return prj.remove_emp(emp)
 
     def is_project_ready_to_run(self, pr_id: int):
-        prj_exists = self.project_exists(pr_id)
-        if not prj_exists:
-            raise Exception("Project does not exist")
         prj = self.projects.get(pr_id)
         if prj.running:
-            print("project is already running")
-            return False
-        if prj.employee_counter <= prj.max_emp_num and prj.employee_counter >= prj.min_emp_num:
-            return True
-        else:
-            return False
+            return 2
+        if prj.emp_counter < prj.min_emp_num:
+            return 1
+        return 0
 
     def start_project(self, pr_id: int):
-        prj_exists = self.project_exists(pr_id)
-        if not prj_exists:
-            raise Exception("Project does not exist")
-        if self.is_project_ready_to_run(pr_id):
-            prj = self.projects.get(pr_id)
-            prj.running = True
+        status = self.is_project_ready_to_run(pr_id)
+        if  status== 0:
+            self.projects[pr_id].running = True
+        return status
+        
 
     def end_project(self, pr_id: int):
         prj_exists = self.project_exists(pr_id)
