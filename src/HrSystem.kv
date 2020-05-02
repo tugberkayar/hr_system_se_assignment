@@ -50,28 +50,33 @@
                     size_hint_y: 0.1
         BoxLayout:
             size_hint_y: 0.3
+            rientation: 'horizontal'
             BoxLayout:
-                orientation: 'vertical'
-            Label:
-                text: 'Project edit'
-                
-            BoxLayout:
-                orientation:'vertical'
+                orienation: 'vertical'
                 Label:
-                    text: 'ID'
-                TextInput:
-           
-            BoxLayout:
-                orientation:'vertical'
-                Label:
-                    text: 'Minimum Employee Number'
-                TextInput:
-            
-            BoxLayout:
-                orientation:'vertical'
-                Label:
-                    text: 'Maximum Employee Number'
-                TextInput:
+                    text: 'Project edit'
+                    size_hint_x:0.2
+                BoxLayout:
+                    orientation: 'horizontal'
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'ID'
+                        TextInput:
+
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Minimum Employee Number'
+                        TextInput:
+
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Maximum Employee Number'
+                        TextInput:
+                    BoxLayout:
+                        size_hint_x:0.1
             GridLayout:
                 cols:3
                 Button:
@@ -85,4 +90,4 @@
                 Button:
                     text: "Fire employee"
                 Button:
-                    text: "Info"
+                    text: "Assign to Project"
