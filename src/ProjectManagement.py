@@ -1,14 +1,30 @@
 from src.Project import Project
 from src.Employee import Employee
-from src.DataHandler import DataHandler
 import numpy as np
 
 class ProjectManagement:
-    def __init__(self):
+    def __init__(self, projects:dict, employees:dict):
         # This class has to know about everything so it holds all projects and employees
-        self.projects = dict()
-        self.employees = dict()
-        self.data_handler = DataHandler()
+        self.projects = projects
+        self.employees = employees
+
+    @property
+    def projects(self):
+        return self.__projects
+
+    @projects.setter
+    def projects(self, projects:dict):
+        self.__projects = projects
+
+    @property
+    def employees(self):
+        return self.__employees
+
+    @employees.setter
+    def employees(self, employees:dict):
+        self.__employees = employees
+
+
 
     def get_projects_ids(self):
         return list(self.projects)

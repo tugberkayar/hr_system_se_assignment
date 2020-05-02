@@ -1,26 +1,22 @@
 from kivy.app import App
 import pandas as pd
-from kivy.uix.label import Label
 from kivy.uix.screenmanager import Screen
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.recycleview.views import RecycleDataViewBehavior
-from kivy.uix.recycleview.layout import LayoutSelectionBehavior
-from kivy.uix.recyclegridlayout import RecycleGridLayout
-from kivy.uix.button import Button
-from kivy.uix.scrollview import ScrollView
-from kivy.uix.recycleview import RecycleView
-from kivy.properties import ListProperty
-from kivy.uix.textinput import TextInput
 from src.DataHandler import DataHandler
-from kivy.uix.spinner import Spinner
+from src.Employee import Employee
+from src.ProjectManagement import ProjectManagement
 
 
 class HomeScreen(Screen):
 
     def __init__(self, *args, **kwargs):
         super(HomeScreen, self).__init__(*args, **kwargs)
+
         self.__data_handler = DataHandler()
+        self.__project_manager = ProjectManagement(
+            self.__data_handler.load_current_employees(),
+            self.__data_handler.load_applicants()
+        )
+
         self.__employees_dict = self.__data_handler.load_current_employees()
         self.__applicant_list = self.__data_handler.load_applicants()
         self.__projects_dict = self.__data_handler.load_current_projects()
@@ -31,9 +27,25 @@ class HomeScreen(Screen):
 
     def hire_button_on_click(self):
         if not self.ids.applicants.text == "Choose an applicant":
-            self.ids.employees.values.append(self.ids.applicants.text)
-            self.ids.applicants.values.remove(self.ids.applicants.text)
-            self.ids.applicants.text = "Choose an applicant"
+            selected_id = int(self.ids.applicants.text.split(":")[-1])
+            applicant = self.__applicant_list[selected_id]
+            random_salary = 4000 + np.random.rand(1)[0] * 1000
+            employee = Employee(salary=random_salary, name=applicant['name'], emp_id=)
+
+    def new_project_on_click(self):
+        pass
+
+    def start_project_on_click(self):
+        pass
+
+    def end_project_on_click(self):
+        pass
+
+    def fire_employee_on_click(self):
+        pass
+
+    def assign_to_project_on_click(self):
+        pass
 
     def __retrieve_project_employees(self):
         for e in self.__employees_dict.values():
