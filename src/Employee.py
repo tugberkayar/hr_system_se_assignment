@@ -4,12 +4,12 @@ import src.Accounting as ac
 
 class Employee(ABC):
 
-    def __init__(self, salary: float, name: str, emp_id: int, domain: str, accounting = None):
+    def __init__(self, salary: float, name: str, emp_id: int, domain: str, accounting = None, project_id= None):
         self.salary = salary
         self.name = name
         self.id = emp_id
         self.domain = domain
-        self.project_id = None
+        self.project_id = project_id
         self.accounting = accounting
 
     @property
@@ -45,12 +45,12 @@ class Employee(ABC):
         self.__domain = domain
 
     @property
-    def project(self):
-        return self.__project
+    def project_id(self):
+        return self.__project_id
 
-    @project.setter
-    def project(self, new_project: pr.Project):
-        self.__project = new_project
+    @project_id.setter
+    def project_id(self, new_project:int):
+        self.__project_id = new_project
 
     @property
     def accounting(self):

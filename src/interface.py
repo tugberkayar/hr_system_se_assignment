@@ -11,16 +11,17 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.recycleview import RecycleView
 from kivy.properties import ListProperty
 from kivy.uix.textinput import TextInput
+from src.DataHandler import DataHandler
+
 
 class HomeScreen(Screen):
-    current_emps = ListProperty([])
-    current_projects = ListProperty([])
+
     def __init__(self, *args, **kwargs):
         super(HomeScreen, self).__init__(*args, **kwargs)
-        self.current_emps = [{'text': 'etkin_'},
-                     {'text': 'etkin0'}]
-        self.current_projects = [{'text': 'ipek_'},
-                     {'text': 'ipek0'}]
+        self.__data_handler = DataHandler()
+        self.__employee_list = self.__data_handler.load_current_employees()
+
+        self.ids.employees.values = [e.name for e in self.__employee_list]
 
     def hire_button_on_click(self):
         if not self.ids.applicants.text == "Choose an applicant":
@@ -31,8 +32,11 @@ class HomeScreen(Screen):
 
 
 class HrSystem(App):
+
     def build(self):
         return HomeScreen()
 
 
-HrSystem().run()
+
+if __name__ == '__main__':
+    HrSystem().run()
