@@ -13,6 +13,7 @@ from kivy.uix.recycleview import RecycleView
 from kivy.properties import ListProperty
 from kivy.uix.textinput import TextInput
 from src.DataHandler import DataHandler
+from kivy.uix.spinner import Spinner
 
 
 class HomeScreen(Screen):
@@ -38,6 +39,11 @@ class HomeScreen(Screen):
         for e in self.__employees_dict.values():
             if not pd.isna(e.project_id):
                 self.__projects_dict[e.project_id].employees[e.id] = e
+
+    def employee_spinner_select(self):
+        selected_id = int(self.ids.employees.text.split(":")[-1])
+        employee = self.__employees_dict[selected_id]
+        print(employee.name)
 
 
 
