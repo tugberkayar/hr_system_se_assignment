@@ -6,6 +6,9 @@ import numpy as np
 from src.ProjectManagement import ProjectManagement
 from src.DataHandler import DataHandler
 from src.Employee import Employee
+import tkinter as tk
+from tkinter.messagebox import showerror
+tk.Tk().withdraw()
 
 #class AccountingPopup(Popup):
 #    pass
@@ -47,6 +50,7 @@ class HomeScreen(Screen):
             self.ids.applicants.values.remove(self.ids.applicants.text)
             self.ids.employees.values = ["Name:{name}, ID:{id}".format(name=e.name, id=e.id) for e in self.__project_manager.employees.values()]
             self.ids.accounting_type_spinner.text = "Choose an accounting type"
+            self.ids.applicants.text = "Choose an applicant"
             #self.accounting_popup.open()
 
     def new_project_on_click(self):
@@ -59,7 +63,15 @@ class HomeScreen(Screen):
         pass
 
     def fire_employee_on_click(self):
-        pass
+        if not self.ids.employees.text == "Choose an employee":
+            print(self.ids.employees.text.split(":")[-1])
+            selected_id = int(self.ids.employees.text.split(":")[-1])
+            if self.__project_manager.fire_employee(employee_id=selected_id):
+                self.ids.employees.values = ["Name:{name}, ID:{id}".format(name=e.name, id=e.id) for e in self.__project_manager.employees.values()]
+            else:
+                showerror("ERROR", "This employee currently working on a project")
+            self.ids.employees.text = "Choose an employee"
+
 
     def assign_to_project_on_click(self):
         pass
@@ -70,20 +82,25 @@ class HomeScreen(Screen):
                 self.__project_manager.projects[e.project_id].employees[e.id] = e
 
     def employee_spinner_select(self):
-        selected_id = int(self.ids.employees.text.split(":")[-1])
-        employee = self.__project_manager.employees[selected_id]
-        self.ids.employee_info.text = str(employee)
-    
+        if not self.ids.employees.text == "Choose an employee":
+            selected_id = int(self.ids.employees.text.split(":")[-1])
+            employee = self.__project_manager.employees[selected_id]
+            self.ids.employee_info.text = str(employee)
+        else:
+            self.ids.employee_info.text = ""
+
     def project_spinner_select(self):
         selected_id = int(self.ids.projects.text)
         project = self.__project_manager.projects[selected_id]
         self.ids.project_info.text = str(project)
 
     def applicant_spinner_select(self):
-        selected_id = int(self.ids.applicants.text.split(":")[-1])
-        applicant = self.__applicant_list[selected_id]
-        self.ids.applicant_info.text = "Name:{name}\ndomain:{domain}".format(name =applicant['name'], domain=applicant['domain'])
-
+        if not self.ids.applicants.text == "Choose an applicant":
+            selected_id = int(self.ids.applicants.text.split(":")[-1])
+            applicant = self.__applicant_list[selected_id]
+            self.ids.applicant_info.text = "Name:{name}\ndomain:{domain}".format(name =applicant['name'], domain=applicant['domain'])
+        else:
+            self.ids.applicant_info.text = ""
 
 class HrSystem(App):
 

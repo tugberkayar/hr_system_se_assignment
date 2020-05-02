@@ -94,11 +94,17 @@ class ProjectManagement:
     # this is for firing employees that not working in a project
     # to use this function remove employee from the project that s/he works on
     def fire_employee(self, employee_id: int):
-        # check if id exists
-        exists = self.employee_exists(employee_id)
-        if not exists:
-            raise Exception("Given id could not found in employees list")
+        #get employee
+        emp = self.employees[employee_id]
+        #check if working on a project and if project is running
+        if emp.project_id is not None:
+            if self.projects[emp.project_id].running:
+                return False
         self.employees.pop(employee_id)
+        return True
+            
+
+        #check if project is running
 
     def add_emp_to_project(self, employee_id: int, project_id: int):
         emp_exists = self.employee_exists(employee_id)
