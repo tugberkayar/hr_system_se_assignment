@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import src.constants as constants
 from src.Employee import Employee
-
+from src.Project import Project
 
 class DataHandler:
     def __init__(self):
@@ -27,17 +27,28 @@ class DataHandler:
 
     def load_current_employees(self):
         emp_df = self.get_data_from_file(constants.EMPLOYEE_FILE_CSV)
-        return [Employee(
+        return {row['id']:Employee(
                     salary=row['salary'],
                     name=row['name'],
                     domain=row['domain'],
                     emp_id=row['id'],
                     accounting=row['accounting'],
-                    project_id=row['project_id']) for index,row in emp_df.iterrows()]
+                    project_id=row['project_id']) for index,row in emp_df.iterrows()}
 
-    def load_current_projects(self, filename: str):
-        proj_df = self.get_data_from_file(filename)
-        return [dict(row) for index, row in proj_df.iterrows()]
+    def load_applicants(self):
+        applicants_df = self.get_data_from_file(constants.APPLICANT_FILE_NAME)
+        return list(applicants_df.T.to_dict().values())
+
+
+    def load_current_projects(self):
+        proj_df = self.get_data_from_file(constants.PROJECT_FILE_CSV)
+        return {row['id']:Project(
+            pr_id=row['id'],
+            min_emp_num=row['min_emp_num'],
+            max_emp_num=row['max_emp_num'],
+            emp_counter=row['emp_counter'],
+            running=row['running']
+        ) for index, row in proj_df.iterrows()}
 
     def save_current_employees(self, emps):
         pass

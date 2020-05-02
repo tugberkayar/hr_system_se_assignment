@@ -1,12 +1,12 @@
 class Project:
 
-    def __init__(self, pr_id: int, min_emp_num: int, max_emp_num: int):
+    def __init__(self, pr_id: int, min_emp_num: int, max_emp_num: int, emp_counter = 0, employees={}, running=False):
         self.id = pr_id
         self.min_emp_num = min_emp_num
         self.max_emp_num = max_emp_num
-        self.emp_counter = 0
-        self.employees = dict()
-        self.running = False
+        self.emp_counter = emp_counter
+        self.employees = employees
+        self.running = running
 
     @property
     def min_emp_num(self):

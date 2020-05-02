@@ -1,3 +1,3 @@
 id,salary,name,domain,project_id,accounting
-0,4000,yusuf,Programmer,,
-1,5000,etkin,Analyst,,
+0,4000,yusuf,Programmer,1000,
+1,5000,etkin,Analyst,2000,
