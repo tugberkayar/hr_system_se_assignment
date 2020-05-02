@@ -18,35 +18,17 @@ class HomeScreen(Screen):
     def __init__(self, *args, **kwargs):
         super(HomeScreen, self).__init__(*args, **kwargs)
         self.current_emps = [{'text': 'etkin_'},
-                     {'text': 'etkin0'},
-                     {'text': 'etkin1'},
-                     {'text': 'etkin2'},
-                     {'text': 'etkin3'},
-                     {'text': 'etkin4'},
-                     {'text': 'etkin5'},
-                     {'text': 'etkin6'},
-                     {'text': 'etkin7'},
-                     {'text': 'etkin8'},
-                     {'text': 'etkin8'},
-                     {'text': 'etkin8'},
-                     {'text': 'etkin8'},
-                     {'text': 'etkin8'},
-                     {'text': 'etkin8'}]
+                     {'text': 'etkin0'}]
         self.current_projects = [{'text': 'ipek_'},
-                     {'text': 'ipek0'},
-                     {'text': 'ipek1'},
-                     {'text': 'ipek2'},
-                     {'text': 'ipek3'},
-                     {'text': 'ipek4'},
-                     {'text': 'ipek5'},
-                     {'text': 'ipek6'},
-                     {'text': 'ipek7'},
-                     {'text': 'ipek8'},
-                     {'text': 'ipek8'},
-                     {'text': 'ipek8'},
-                     {'text': 'ipek8'},
-                     {'text': 'ipek8'},
-                     {'text': 'ipek8'}]
+                     {'text': 'ipek0'}]
+
+    def hire_button_on_click(self):
+        if not self.ids.applicants.text == "Choose an applicant":
+            self.ids.employees.values.append(self.ids.applicants.text)
+            self.ids.applicants.values.remove(self.ids.applicants.text)
+            self.ids.applicants.text = "Choose an applicant"
+
+
 
 class HrSystem(App):
     def build(self):
