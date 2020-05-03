@@ -2,7 +2,7 @@ from src.Project import Project
 from src.Employee import Employee
 from src.Accounting import Accounting
 import numpy as np
-
+import random
 
 class ProjectManagement:
     def __init__(self, projects: dict, employees: dict):
@@ -102,14 +102,27 @@ class ProjectManagement:
                 return False
         self.employees.pop(employee_id)
         return True
-            
 
-        #check if project is running
+    def check_if_all_projects_maxed(self):
+        for p in self.projects:
+            if not self.projects[p].emp_counter == self.projects[p].max_emp_num:
+                return False
+        return True
 
     def assign_to_project(self, employee_id: int, project_id: int):
-        emp = self.employees.[employee_id]
-        prj = self.projects.[project_id]
+        emp = self.employees[employee_id]
+        prj = self.projects[project_id]
         return prj.add_emp(emp)
+
+    def random_assign_to_project(self,employee_id:int):
+        if self.check_if_all_projects_maxed():
+            return False
+        else:
+            status = False
+            while not status:
+                random_project_id = random.choice(list(self.projects))
+                status = self.assign_to_project(employee_id, random_project_id)
+            return True
 
     def remove_emp_from_project(self, employee_id: int, project_id: int):
         emp_exists = self.employee_exists(employee_id)
@@ -143,6 +156,11 @@ class ProjectManagement:
         prj = self.projects.get(pr_id)
         if prj.running:
             prj.running = False
+            prj = self.projects.pop(pr_id)
+            for emp_id in prj.employees:
+                status = self.random_assign_to_project(emp_id)
+                if not status:
+                    self.employees[emp_id].project_id = None
             return True
         else:
             return False

@@ -43,17 +43,16 @@ class Project:
     
     def __str__(self):
         return "id : {}\nmin_emp_num : {}\nmax_emp_num : {}\nemp_counter : {}\nis_running : {}\n".format(self.id,self.__min_emp_num,self.__max_emp_num, self.__emp_counter, self.running)
-    #buradan devam edeceğiz
+
     def add_emp(self, new_emp):
         if self.max_emp_num == self.emp_counter:
-            print('PRoje maksimum kapasitede')
             return False
         elif new_emp.id in self.employees.keys():
-            print('Eleman zaten bu projede calısıyor')
             return False
         else:
             self.employees[new_emp.id] = new_emp
             self.emp_counter += 1
+            new_emp.project_id = self.id
             return True
 
     def remove_emp(self, employee_id: int):
