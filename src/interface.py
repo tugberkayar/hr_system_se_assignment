@@ -182,8 +182,9 @@ class HomeScreen(Screen):
             self.ids.applicant_info.text = ""
 
     def save_before_exit(self,*args):
-        print(*args)
         self.__data_handler.save_current_employees(self.__project_manager.employees.values())
+        self.__data_handler.save_current_projects(self.__project_manager.projects.values())
+        self.__data_handler.save_current_applicants(self.__project_manager.applicants.values())
 
 
 class HrSystem(App):
