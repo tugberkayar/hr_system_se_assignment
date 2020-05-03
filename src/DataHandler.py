@@ -81,7 +81,7 @@ class DataHandler:
         
 
     def save_current_applicants(self, applicants):
-        pass
+        pd.DataFrame(applicants).to_csv(os.path.join(self.data_path,constants.APPLICANT_FILE_NAME),index=False)
 
     def generate_random_employee_data(self, size: int):
         pass

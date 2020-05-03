@@ -97,7 +97,7 @@ class ProjectManagement:
         # get employee
         emp = self.employees[employee_id]
         # check if working on a project and if project is running
-        if emp.project_id is not None:
+        if not pd.isna(emp.project_id):
             if self.projects[emp.project_id].running:
                 return False
         self.employees.pop(employee_id)

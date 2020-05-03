@@ -54,6 +54,7 @@ class HomeScreen(Screen):
                                                        domain=applicant["domain"],
                                                        default_accounting=accounting)
             self.ids.applicants.values.remove(self.ids.applicants.text)
+            self.__applicant_list.remove(applicant)
             self.reset_employee_spinner_values()
             self.ids.accounting_type_spinner.text = "Choose an accounting type"
             self.ids.applicants.text = "Choose an applicant"
@@ -184,7 +185,7 @@ class HomeScreen(Screen):
     def save_before_exit(self,*args):
         self.__data_handler.save_current_employees(self.__project_manager.employees.values())
         self.__data_handler.save_current_projects(self.__project_manager.projects.values())
-        self.__data_handler.save_current_applicants(self.__project_manager.applicants.values())
+        self.__data_handler.save_current_applicants(self.__applicant_list)
 
 
 class HrSystem(App):
