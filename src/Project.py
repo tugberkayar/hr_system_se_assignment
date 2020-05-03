@@ -33,13 +33,13 @@ class Project:
         self.__emp_counter = value
 
     @property
-    def employess(self):
+    def employees(self):
         return self.__employees
 
     #fixes no member named __employees problem??
-    #@employess.setter
-    #def employees(self):
-    #    self.__employees = None
+    @employees.setter
+    def employees(self,employees):
+        self.__employees = employees
     
     def __str__(self):
         return "id : {}\nmin_emp_num : {}\nmax_emp_num : {}\nemp_counter : {}\nis_running : {}\n".format(self.id,self.__min_emp_num,self.__max_emp_num, self.__emp_counter, self.running)
