@@ -4,11 +4,13 @@ import src.constants as constants
 from src.Employee import Employee
 from src.Project import Project
 from src.Accounting import Accounting
+from collections import defaultdict
+
 
 class DataHandler:
     def __init__(self):
         # paths relative to main script
-        self.souce_files_path = "src"
+        self.soruce_files_path = "src"
         self.data_path = "data"
         self.RED = "\033[1;31m"
         self.GREEN = "\033[1;32m"
@@ -52,7 +54,15 @@ class DataHandler:
         ) for index, row in proj_df.iterrows()}
 
     def save_current_employees(self, emps):
-        pass
+        df_to_save = defaultdict(list)
+        for e in emps:
+            df_to_save["id"].append(e.id)
+            df_to_save["name"].append(e.name)
+            df_to_save["domain"].append(e.domain)
+            df_to_save["project_id"].append(e.project_id)
+            accounting = "Default" if e.accounting.service == None else "WebService"
+            df_to_save["accounting"].append(accounting)
+        pd.DataFrame(df_to_save).to_csv(os.path.join(self.data_path,constants.EMPLOYEE_FILE_CSV), index=False)
 
     def save_current_projects(self, projects):
         pass
