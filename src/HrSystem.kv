@@ -7,7 +7,7 @@
                 orientation : 'vertical'
                 Label:
                     text: 'Aplicants'
-                    size_hint_y: 0.1
+                    size_hint_y: 0.115
                 Spinner:
                     size_hint_y: 0.1
                     id: applicants
@@ -43,37 +43,52 @@
                     size_hint_y: 0.1
                     id: employees
                     text: "Choose an employee"
-                    on_text:root.employee_spinner_select()
+                    on_text: root.employee_spinner_select()
                 Label:
-                    id:employee_info
+                    id: employee_info
                     size_hint_y: 0.8
         BoxLayout:
             size_hint_y: 0.3
-            rientation: 'horizontal'
+            orientation: 'horizontal'
             BoxLayout:
-                orienation: 'vertical'
-                Label:
-                    text: 'Project edit'
-                    size_hint_x:0.2
+                orientation: 'vertical'
+                BoxLayout:
+                    size_hint_y:0.1
+                    Label:
+                        text: 'Project edit'
+                BoxLayout:
+                    size_hint_y:0.3
                 BoxLayout:
                     orientation: 'horizontal'
                     BoxLayout:
-                        orientation:'vertical'
-                        Label:
-                            text: 'ID'
-                        TextInput:
+                        size_hint_x:0.1
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Minimum Employee Number'
+                            text: 'Name'
                         TextInput:
+                            id:text_input_name
+                    BoxLayout:
+                        size_hint_x:0.05
                     BoxLayout:
                         orientation:'vertical'
                         Label:
-                            text: 'Maximum Employee Number'
+                            text: 'Min Employee'
                         TextInput:
+                            id:text_input_min
+                    BoxLayout:
+                        size_hint_x:0.05
+                    BoxLayout:
+                        orientation:'vertical'
+                        Label:
+                            text: 'Max Employee'
+                        TextInput:
+                            id:text_input_max
                     BoxLayout:
                         size_hint_x:0.1
+                BoxLayout:
+                    size_hint_x:0.1
+                    size_hint_y: 0.35
             GridLayout:
                 cols:3
                 Button:

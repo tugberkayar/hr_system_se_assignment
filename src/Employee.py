@@ -65,15 +65,17 @@ class Employee(ABC):
     def __str__(self):
         return r"""---------------------
 ID   : {id},
-Isim : {name},
-Maas : {salary},
-Alan : {domain},
+Name : {name},
+Salary : {salary},
+Domain : {domain},
+Project ID : {pr_id}
 ---------------------
             
         """.format(id=self.id,
                    name=self.name,
-                   salary=self.salary,
-                   domain=self.domain)
+                   salary=int(self.salary),
+                   domain=self.domain,
+                   pr_id= self.project_id)
 
 
 class Analyst(Employee):

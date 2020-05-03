@@ -3,6 +3,7 @@ import os
 import src.constants as constants
 from src.Employee import Employee
 from src.Project import Project
+from src.Accounting import Accounting
 
 class DataHandler:
     def __init__(self):
@@ -32,9 +33,8 @@ class DataHandler:
                     name=row['name'],
                     domain=row['domain'],
                     emp_id=row['id'],
-                    accounting=row['accounting'],
+                    accounting=Accounting(True) if row['accounting'] =="WebService" else Accounting(False),
                     project_id=row['project_id']) for index,row in emp_df.iterrows()}
-
     def load_applicants(self):
         applicants_df = self.get_data_from_file(constants.APPLICANT_FILE_NAME)
         return list(applicants_df.T.to_dict().values())
@@ -44,6 +44,7 @@ class DataHandler:
         proj_df = self.get_data_from_file(constants.PROJECT_FILE_CSV)
         return {row['id']:Project(
             pr_id=row['id'],
+            name=row['name'],
             min_emp_num=row['min_emp_num'],
             max_emp_num=row['max_emp_num'],
             emp_counter=row['emp_counter'],

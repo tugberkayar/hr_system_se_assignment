@@ -2,7 +2,9 @@ from src.Project import Project
 from src.Employee import Employee
 from src.Accounting import Accounting
 import numpy as np
+import pandas as pd
 import random
+
 
 class ProjectManagement:
     def __init__(self, projects: dict, employees: dict):
@@ -26,7 +28,6 @@ class ProjectManagement:
     def employees(self, employees: dict):
         self.__employees = employees
 
-
     def get_projects_ids(self):
         return list(self.projects)
 
@@ -43,18 +44,17 @@ class ProjectManagement:
             return prj.running
 
     # create a project with min and max number of employee constraints
-    def create_project(self, pr_id: int, min_emp_num: int, max_emp_num: int):
-        exists = self.project_exists(pr_id)
-        if exists:
-            raise Exception("project already exists")
+    def create_project(self, name: str, min_emp_num: int, max_emp_num: int):
         if min_emp_num <= 0 or max_emp_num <= min_emp_num:
-            raise Exception("Boundaries are not plausible")
+            return False
         else:
             # if boundaries are plausible create and return a "project" object
-            temp = Project(pr_id, min_emp_num, max_emp_num)
+            ids = self.get_projects_ids()
+            generated_id = np.array(ids).max() + 1
+            temp = Project(generated_id, name , min_emp_num, max_emp_num)
             # append newly created project to projects list
             self.projects[temp.id] = temp
-            return temp
+            return True
 
     def get_emps_ids(self):
         return list(self.employees)
@@ -76,16 +76,16 @@ class ProjectManagement:
         random_salary = 4000 + np.random.rand(1)[0] * 1000
         # decide if using webservice of default accounting
         if default_accounting is None:
-            accounting = None
+            accounting = Accounting(False)
         else:
-            accounting = Accounting()
+            accounting = Accounting(True)
         # create employee
         emp = Employee(salary=random_salary,
-                        name= name,
-                        emp_id= generated_id,
-                        domain=domain,
-                        accounting=accounting
-                        )
+                       name=name,
+                       emp_id=generated_id,
+                       domain=domain,
+                       accounting=accounting
+                       )
         # add employee to list
         self.employees[emp.id] = emp
         # override for reading from file ???
@@ -94,9 +94,9 @@ class ProjectManagement:
     # this is for firing employees that not working in a project
     # to use this function remove employee from the project that s/he works on
     def fire_employee(self, employee_id: int):
-        #get employee
+        # get employee
         emp = self.employees[employee_id]
-        #check if working on a project and if project is running
+        # check if working on a project and if project is running
         if emp.project_id is not None:
             if self.projects[emp.project_id].running:
                 return False
@@ -111,10 +111,12 @@ class ProjectManagement:
 
     def assign_to_project(self, employee_id: int, project_id: int):
         emp = self.employees[employee_id]
+        if not pd.isna(emp.project_id):
+            return -1
         prj = self.projects[project_id]
         return prj.add_emp(emp)
 
-    def random_assign_to_project(self,employee_id:int):
+    def random_assign_to_project(self, employee_id: int):
         if self.check_if_all_projects_maxed():
             return False
         else:
@@ -147,20 +149,21 @@ class ProjectManagement:
 
     def start_project(self, pr_id: int):
         status = self.is_project_ready_to_run(pr_id)
-        if  status== 0:
+        if status == 0:
             self.projects[pr_id].running = True
         return status
-        
 
     def end_project(self, pr_id: int):
         prj = self.projects.get(pr_id)
         if prj.running:
             prj.running = False
             prj = self.projects.pop(pr_id)
+            # for emp_id in prj.employees:
+            #    status = self.random_assign_to_project(emp_id)
+            #    if not status:
+            #        self.employees[emp_id].project_id = None
             for emp_id in prj.employees:
-                status = self.random_assign_to_project(emp_id)
-                if not status:
-                    self.employees[emp_id].project_id = None
+                self.employees[emp_id].project_id = None
             return True
         else:
             return False

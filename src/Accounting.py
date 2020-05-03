@@ -4,8 +4,11 @@ import numpy as np
 
 class Accounting:
 
-    def __init__(self):
-        self.service = None
+    def __init__(self,service:bool):
+        if service:
+            self.service = WebService()
+        else:
+            self.service = None
         self.percentage = np.random.rand(1)[0]
 
     @property
