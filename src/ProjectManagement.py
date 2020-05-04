@@ -65,7 +65,7 @@ class ProjectManagement:
         # if given id in current ids return True else False
         return emp_id in ids
 
-    def hire_employee(self, name: str, domain: str, default_accounting=None):
+    def hire_employee(self, name: str, domain: str, def_acc=None):
         # generate id
         ids = self.get_emps_ids()
         if len(ids) == 0:
@@ -75,7 +75,7 @@ class ProjectManagement:
         # generate salary
         random_salary = 4000 + np.random.rand(1)[0] * 1000
         # decide if using webservice of default accounting
-        if default_accounting is None:
+        if def_acc is None:
             accounting = Accounting(False)
         else:
             accounting = Accounting(True)
@@ -116,15 +116,15 @@ class ProjectManagement:
         prj = self.projects[project_id]
         return prj.add_emp(emp)
 
-    def random_assign_to_project(self, employee_id: int):
-        if self.check_if_all_projects_maxed():
-            return False
-        else:
-            status = False
-            while not status:
-                random_project_id = random.choice(list(self.projects))
-                status = self.assign_to_project(employee_id, random_project_id)
-            return True
+#    def random_assign_to_project(self, employee_id: int):
+#        if self.check_if_all_projects_maxed():
+#            return False
+#        else:
+#            status = False
+#            while not status:
+#                random_project_id = random.choice(list(self.projects))
+#                status = self.assign_to_project(employee_id, random_project_id)
+#            return True
 
     def remove_emp_from_project(self, employee_id: int, project_id: int):
         emp_exists = self.employee_exists(employee_id)
