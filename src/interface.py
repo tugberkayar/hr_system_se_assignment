@@ -195,8 +195,5 @@ class HrSystem(App):
         Window.bind(on_request_close = self.home_screen.save_before_exit)
         return self.home_screen
 
-    def dummy(self,*args):
-        print("hello")
-
 if __name__ == '__main__':
     HrSystem().run()
