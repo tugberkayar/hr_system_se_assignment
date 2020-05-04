@@ -52,7 +52,7 @@ class HomeScreen(Screen):
                 accounting = Accounting(True)
             emp = self.__project_manager.hire_employee(name=applicant["name"],
                                                        domain=applicant["domain"],
-                                                       default_accounting=accounting)
+                                                       def_acc=accounting)
             self.ids.applicants.values.remove(self.ids.applicants.text)
             self.__applicant_list.remove(applicant)
             self.reset_employee_spinner_values()
