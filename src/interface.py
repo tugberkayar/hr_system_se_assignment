@@ -44,17 +44,21 @@ class HomeScreen(Screen):
     def hire_button_on_click(self):
         if (not self.ids.applicants.text == "Choose an applicant" and
                 not self.ids.accounting_type_spinner.text == "Choose an accounting type"):
-            selected_id = int(self.ids.applicants.text.split(":")[-1])
-            applicant = self.__applicant_list[selected_id]
-            if self.ids.accounting_type_spinner.text == "Default":
-                accounting = Accounting(False)
+            status = self.__project_manager.check_if_all_projects_maxed()
+            if status:
+                showerror("ERROR","All projects maxed out.")
             else:
-                accounting = Accounting(True)
-            emp = self.__project_manager.hire_employee(name=applicant["name"],
+                selected_id = int(self.ids.applicants.text.split(":")[-1])
+                applicant = self.__applicant_list[selected_id]
+                if self.ids.accounting_type_spinner.text == "Default":
+                    accounting = Accounting(False)
+                else:
+                    accounting = Accounting(True)
+                emp = self.__project_manager.hire_employee(name=applicant["name"],
                                                        domain=applicant["domain"],
                                                        def_acc=accounting)
-            self.ids.applicants.values.remove(self.ids.applicants.text)
-            self.__applicant_list.remove(applicant)
+                self.ids.applicants.values.remove(self.ids.applicants.text)
+                self.__applicant_list.remove(applicant)
             self.reset_employee_spinner_values()
             self.ids.accounting_type_spinner.text = "Choose an accounting type"
             self.ids.applicants.text = "Choose an applicant"
